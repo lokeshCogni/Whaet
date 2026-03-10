@@ -1,6 +1,7 @@
 /* ================================
-   FOOTER BACKGROUND (wheat image)
+   FOOTER — BACKGROUND
    ================================ */
+
 footer {
   background-image: url("https://themeloto.com/wps/whaet/wp-content/uploads/2024/12/whaet-slider3.jpg");
   background-size: cover;
@@ -10,28 +11,22 @@ footer {
   color: #fff;
 }
 
-/* If you still have a footer::before overlay somewhere, keep it OFF
-   so only the inner panel is dark, like your reference. */
-/* footer::before { display: none !important; } */
-
 
 /* ================================
    INNER CONTENT PANEL (DARK CARD)
-   We don’t assume an exact wrapper class; we cover the common cases:
-   - footer > div (your pasted HTML)
-   - footer .footer   (Franklin default)
-   - footer .block    (some projects wrap blocks with .block)
+   We cover common Franklin/EDS wrappers to avoid specificity issues.
    ================================ */
+
 footer > div:first-child,
 footer .footer,
 footer .block.footer,
 footer .footer.block {
-  background: rgba(0, 0, 0, 0.65);
+  background: rgb(0 0 0 / 65%);
   border-radius: 12px;
   padding: 40px 32px 24px;
   max-width: 1200px;
   margin: 32px auto 12px;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+  box-shadow: 0 12px 28px rgb(0 0 0 / 30%);
   position: relative;
   z-index: 1;
 }
@@ -45,13 +40,16 @@ footer .footer.block::after {
   display: block;
   height: 1px;
   width: 100%;
-  background: rgba(255,255,255,0.22);
+  background: rgb(255 255 255 / 22%);
   margin-top: 24px;
 }
 
+
 /* ================================
    TYPOGRAPHY & LINKS INSIDE PANEL
+   Grouped selectors prevent descending-specificity warnings.
    ================================ */
+
 footer > div:first-child h1,
 footer > div:first-child h2,
 footer > div:first-child h3,
@@ -70,52 +68,62 @@ footer .footer a {
 }
 
 footer > div:first-child p,
-footer .footer p,
 footer > div:first-child li,
+footer .footer p,
 footer .footer li {
-  color: rgba(255,255,255,0.92) !important;
+  color: rgb(255 255 255 / 92%) !important;
   margin: 0 0 8px;
   line-height: 1.6;
 }
 
 footer > div:first-child a:any-link,
-footer .footer a:any-link { text-decoration: none; }
+footer .footer a:any-link {
+  text-decoration: none;
+}
 
 footer > div:first-child a:hover,
-footer .footer a:hover { color: #A2A84C !important; text-decoration: underline; }
+footer .footer a:hover {
+  color: #a2a84c !important;
+  text-decoration: underline;
+}
 
 footer > div:first-child ul,
-footer .footer ul { margin: 0; padding-left: 18px; }
+footer .footer ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
 
 /* ================================
    COLUMNS GRID
-   Your fragment has: <div class="columns"> with 4 child <div>s.
+   .columns holds the four sibling <div> sections
    ================================ */
+
 footer .columns {
-  display: grid !important;
-  grid-template-columns: 1.2fr 1fr 1.2fr auto; /* text,text,text,gallery */
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.2fr auto; /* text, text, text, gallery */
   gap: 24px 32px;
   align-items: start;
 }
 
-/* Heading size close to reference */
+/* Heading size near reference */
 footer .columns > div:first-child h1 {
   font-size: clamp(22px, 2.2vw, 28px);
   margin: 0 0 12px;
 }
 
+
 /* ================================
    RECENT GALLERY — 3×3
-   In your HTML, the gallery is the 4th <div> inside .columns,
-   containing many <p><picture><img>...</p>
-   If in DevTools you see gallery at 3rd or 5th, change :nth-child(4).
+   Your 4th column contains many <p><picture><img>…</p>
    ================================ */
+
 footer .columns > div:nth-child(4) {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   max-width: 360px;
-  justify-self: end; /* align to right edge of panel */
+  justify-self: end; /* align to the right edge of panel */
 }
 
 /* Each <p> is one tile */
@@ -125,8 +133,8 @@ footer .columns > div:nth-child(4) > p {
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 6px;
-  border: 1px solid rgba(255,255,255,0.25);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  border: 1px solid rgb(255 255 255 / 25%);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 30%);
 }
 
 /* Make picture/img fill the tile */
@@ -140,7 +148,7 @@ footer .columns > div:nth-child(4) img {
 footer .columns > div:nth-child(4) img {
   object-fit: cover;
   transform: translateZ(0);
-  transition: transform .2s ease, filter .2s ease;
+  transition: transform 0.2s ease, filter 0.2s ease;
 }
 
 /* Hover micro-interaction (optional) */
@@ -154,42 +162,55 @@ footer .columns > div:nth-child(4) > p:nth-child(n+10) {
   display: none !important;
 }
 
+
 /* ================================
-   SOCIAL ICONS (if used in column 1)
+   SOCIAL ICONS (if present in column 1)
    ================================ */
+
 footer .social-icons a {
   display: inline-block;
-  width: 40px; height: 40px;
-  line-height: 40px; text-align: center;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
   border-radius: 6px;
-  background: rgba(255,255,255,0.08);
+  background: rgb(255 255 255 / 8%);
   color: #fff !important;
-  margin-right: 7px; margin-top: 10px;
-  transition: background .2s ease, transform .2s ease;
+  margin-right: 7px;
+  margin-top: 10px;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
+
 footer .social-icons a:hover {
-  background: rgba(255,255,255,0.18);
+  background: rgb(255 255 255 / 18%);
   transform: translateY(-1px);
 }
 
+
 /* ================================
-   COPYRIGHT STRIP (your trailing <p>)
+   COPYRIGHT STRIP (the trailing <p>)
    ================================ */
+
 footer > p {
-  color: rgba(255,255,255,0.85) !important;
+  color: rgb(255 255 255 / 85%) !important;
   font-size: 0.92rem;
   margin: 6px auto 18px;
   max-width: 1200px;
   padding: 8px 12px 0;
 }
 
+
 /* ================================
    RESPONSIVE
+   Use range notation to satisfy stylelint rule:
+   media-feature-range-notation
    ================================ */
-@media (max-width: 1024px) {
+
+@media (width <= 1024px) {
   footer .columns {
-    grid-template-columns: 1fr 1fr;  /* 2 columns on tablets */
+    grid-template-columns: 1fr 1fr; /* 2 columns on tablets */
   }
+
   footer .columns > div:nth-child(4) {
     grid-template-columns: repeat(2, 1fr);
     max-width: 260px;
@@ -197,14 +218,16 @@ footer > p {
   }
 }
 
-@media (max-width: 560px) {
+@media (width <= 560px) {
   footer .columns {
-    grid-template-columns: 1fr;      /* single column on phones */
+    grid-template-columns: 1fr; /* single column on phones */
   }
+
   footer .columns > div:nth-child(4) {
     grid-template-columns: 1fr;
     max-width: 220px;
   }
+
   footer > div:first-child,
   footer .footer,
   footer .block.footer,
