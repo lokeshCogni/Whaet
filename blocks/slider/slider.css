@@ -1,143 +1,141 @@
-/* blocks/slider/slider.css */
+// blocks/slider/slider.js
+// Horizontal card slider for EDS with loop + autoplay + keyboard support
 
-:root {
-  --olive: #A2A84C;
-}
+function buildCard(row) {
+  const img = row.querySelector('img, picture');
+  const texts = [...row.querySelectorAll('p, h1, h2, h3, h4, h5, h6, a')].filter((n) => !n.querySelector('img'));
 
-.block.slider {
-  --gap: 24px;
-    
-  position: relative;
-  padding: 12px 0;
-}
+  const card = document.createElement('article');
+  card.className = 'slider-card';
 
-/* Viewport & track (native scroll-snap for no-JS fallback) */
-.slider-viewport {
-  overflow: auto hidden; /* shorthand: x=auto, y=hidden */
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-  display: block;
-  padding: 8px 40px; /* space for buttons overlay */
-}
-
-.slider-track {
-  display: flex;
-  gap: var(--gap);
-}
-
-/* Card */
-.slider-card {
-  position: relative;
-  flex: 0 0 280px;              /* card width like demo */
-  scroll-snap-align: start;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #f5f5f5;
-}
-
-.slider-card .card-media {
-  aspect-ratio: 4 / 3;
-  background: #ddd;
-}
-
-.slider-card .card-media img,
-.slider-card .card-media picture {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-/* Olive title panel centered near the bottom */
-.slider-card .card-overlay {
-  position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  background: var(--olive);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  text-align: center;
-  max-width: calc(100% - 24px);
-}
-
-/* optional smaller meta text under the image */
-.slider-card .card-meta {
-  display: none; /* hidden by default to match the minimal look */
-  padding: 10px 12px 12px;
-  color: #333;
-}
-
-/* Make the whole card clickable if a link exists */
-.slider-card .card-link {
-  position: absolute;
-  inset: 0;
-  border: 0;
-  text-indent: -9999px;
-}
-
-/* Controls (arrow buttons) */
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  border: 0;
-  border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
-  cursor: pointer;
-}
-
-.slider-btn.prev {
-  left: 0;
-}
-
-.slider-btn.next {
-  right: 0;
-}
-
-/* Chevron glyph (CSS only) */
-.slider-btn .chev {
-  display: block;
-  width: 10px;
-  height: 10px;
-  border-right: 3px solid #666;
-  border-bottom: 3px solid #666;
-  margin: 0 auto;
-  transform: rotate(-45deg);
-}
-
-.slider-btn.next .chev {
-  transform: rotate(315deg);
-}
-
-.slider-btn.prev .chev {
-  transform: rotate(135deg);
-}
-
-.slider-btn:hover {
-  filter: brightness(0.98);
-}
-
-.slider-btn:focus-visible {
-  outline: 2px solid var(--olive);
-  outline-offset: 2px;
-}
-
-/* Responsive */
-@media (width <= 600px) {
-  .slider-card {
-    flex-basis: 240px;
+  if (img) {
+    const media = document.createElement('div');
+    media.className = 'card-media';
+    media.append(img.closest('picture') || img);
+    card.append(media);
   }
 
-  .slider-viewport {
-    padding: 8px 32px;
+  const titleText = (texts[0]?.textContent || '').trim();
+  if (titleText) {
+    const overlay = document.createElement('div');
+    overlay.className = 'card-overlay';
+    overlay.textContent = titleText;
+    card.append(overlay);
+  }
+
+  if (texts[1]) {
+    const meta = document.createElement('div');
+    meta.className = 'card-meta';
+    meta.textContent = texts[1].textContent.trim();
+    card.append(meta);
+  }
+
+  const firstLink = row.querySelector('a[href]');
+  if (firstLink) {
+    const link = document.createElement('a');
+    link.className = 'card-link';
+    link.href = firstLink.href;
+    link.setAttribute('aria-label', `Open: ${titleText || 'item'}`);
+    card.append(link);
+  }
+
+  return card;
+}
+
+function getStep(viewport) {
+  const first = viewport.querySelector('.slider-card');
+  if (!first) return 0;
+  const gap = parseFloat(getComputedStyle(viewport).getPropertyValue('--gap')) || 24;
+  return first.getBoundingClientRect().width + gap;
+}
+
+function loopScroll(viewport, dir) {
+  const step = getStep(viewport);
+  if (!step) return;
+
+  const max = viewport.scrollWidth - viewport.clientWidth;
+
+  // Wrap forward (last → first)
+  if (dir > 0 && viewport.scrollLeft >= max - step / 2) {
+    viewport.scrollLeft = 0;                 // instant jump
+    requestAnimationFrame(() => {
+      viewport.scrollBy({ left: step, behavior: 'smooth' });
+    });
+    return;
+  }
+
+  // Wrap backward (first → last)
+  if (dir < 0 && viewport.scrollLeft <= step / 2) {
+    viewport.scrollLeft = max;               // instant jump
+    requestAnimationFrame(() => {
+      viewport.scrollBy({ left: -step, behavior: 'smooth' });
+    });
+    return;
+  }
+
+  // Normal step
+  viewport.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+
+export default function decorate(block) {
+  block.classList.add('is-enhanced');
+
+  const rows = [...block.children];
+  const viewport = document.createElement('div');
+  viewport.className = 'slider-viewport';
+  const track = document.createElement('div');
+  track.className = 'slider-track';
+  viewport.append(track);
+
+  rows.forEach((row) => {
+    const card = buildCard(row);
+    if (card) track.append(card);
+    row.remove();
+  });
+
+  const prev = document.createElement('button');
+  prev.className = 'slider-btn prev';
+  prev.setAttribute('aria-label', 'Previous');
+  prev.innerHTML = '<span class="chev"></span>';
+
+  const next = document.createElement('button');
+  next.className = 'slider-btn next';
+  next.setAttribute('aria-label', 'Next');
+  next.innerHTML = '<span class="chev"></span>';
+
+  prev.addEventListener('click', () => loopScroll(viewport, -1));
+  next.addEventListener('click', () => loopScroll(viewport, 1));
+
+  // Keyboard
+  viewport.setAttribute('tabindex', '0');
+  viewport.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') loopScroll(viewport, -1);
+    if (e.key === 'ArrowRight') loopScroll(viewport, 1);
+  });
+
+  // Map vertical wheel to horizontal movement
+  viewport.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      viewport.scrollBy({ left: e.deltaY, behavior: 'auto' });
+    }
+  }, { passive: true });
+
+  block.append(prev, viewport, next);
+
+  // Autoplay (pause on hover/focus)
+  const AUTOPLAY_MS = 3000;
+  let timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS);
+  const stop = () => { clearInterval(timer); timer = null; };
+  const start = () => { if (!timer) timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS); };
+
+  block.addEventListener('mouseenter', stop);
+  block.addEventListener('mouseleave', start);
+  block.addEventListener('focusin', stop);
+  block.addEventListener('focusout', start);
+
+  // Respect reduced motion
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stop();
+    viewport.style.scrollBehavior = 'auto';
   }
 }
