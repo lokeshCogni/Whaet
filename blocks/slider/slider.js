@@ -1,5 +1,7 @@
+// blocks/slider/slider.js
+// Horizontal card slider for EDS with loop + autoplay + keyboard support
+
 function buildCard(row) {
-  // Accept either: an <img>/<picture> + texts, or plain text with links
   const img = row.querySelector('img, picture');
   const texts = [...row.querySelectorAll('p, h1, h2, h3, h4, h5, h6, a')].filter((n) => !n.querySelector('img'));
 
@@ -9,12 +11,10 @@ function buildCard(row) {
   if (img) {
     const media = document.createElement('div');
     media.className = 'card-media';
-    // move the picture/img inside
     media.append(img.closest('picture') || img);
     card.append(media);
   }
 
-  // Title overlay (first meaningful text)
   const titleText = (texts[0]?.textContent || '').trim();
   if (titleText) {
     const overlay = document.createElement('div');
@@ -23,7 +23,6 @@ function buildCard(row) {
     card.append(overlay);
   }
 
-  // Optional caption/secondary line (second text node)
   if (texts[1]) {
     const meta = document.createElement('div');
     meta.className = 'card-meta';
@@ -31,7 +30,6 @@ function buildCard(row) {
     card.append(meta);
   }
 
-  // If there is a link in the row, make the whole card clickable
   const firstLink = row.querySelector('a[href]');
   if (firstLink) {
     const link = document.createElement('a');
@@ -44,18 +42,44 @@ function buildCard(row) {
   return card;
 }
 
-function scrollByStep(viewport, dir = 1) {
+function getStep(viewport) {
   const first = viewport.querySelector('.slider-card');
-  if (!first) return;
+  if (!first) return 0;
   const gap = parseFloat(getComputedStyle(viewport).getPropertyValue('--gap')) || 24;
-  const step = first.getBoundingClientRect().width + gap;
+  return first.getBoundingClientRect().width + gap;
+}
+
+function loopScroll(viewport, dir) {
+  const step = getStep(viewport);
+  if (!step) return;
+
+  const max = viewport.scrollWidth - viewport.clientWidth;
+
+  // Wrap forward (last → first)
+  if (dir > 0 && viewport.scrollLeft >= max - step / 2) {
+    viewport.scrollLeft = 0;                 // instant jump
+    requestAnimationFrame(() => {
+      viewport.scrollBy({ left: step, behavior: 'smooth' });
+    });
+    return;
+  }
+
+  // Wrap backward (first → last)
+  if (dir < 0 && viewport.scrollLeft <= step / 2) {
+    viewport.scrollLeft = max;               // instant jump
+    requestAnimationFrame(() => {
+      viewport.scrollBy({ left: -step, behavior: 'smooth' });
+    });
+    return;
+  }
+
+  // Normal step
   viewport.scrollBy({ left: dir * step, behavior: 'smooth' });
 }
 
 export default function decorate(block) {
   block.classList.add('is-enhanced');
 
-  // Wrap original rows into a viewport/track
   const rows = [...block.children];
   const viewport = document.createElement('div');
   viewport.className = 'slider-viewport';
@@ -69,7 +93,6 @@ export default function decorate(block) {
     row.remove();
   });
 
-  // Controls
   const prev = document.createElement('button');
   prev.className = 'slider-btn prev';
   prev.setAttribute('aria-label', 'Previous');
@@ -80,28 +103,39 @@ export default function decorate(block) {
   next.setAttribute('aria-label', 'Next');
   next.innerHTML = '<span class="chev"></span>';
 
-  prev.addEventListener('click', () => scrollByStep(viewport, -1));
-  next.addEventListener('click', () => scrollByStep(viewport, 1));
+  prev.addEventListener('click', () => loopScroll(viewport, -1));
+  next.addEventListener('click', () => loopScroll(viewport, 1));
 
-  // Keyboard support on viewport
+  // Keyboard
   viewport.setAttribute('tabindex', '0');
   viewport.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') scrollByStep(viewport, -1);
-    if (e.key === 'ArrowRight') scrollByStep(viewport, 1);
+    if (e.key === 'ArrowLeft') loopScroll(viewport, -1);
+    if (e.key === 'ArrowRight') loopScroll(viewport, 1);
   });
 
-  // Map vertical wheel to horizontal scroll (nice on desktops)
+  // Map vertical wheel to horizontal movement
   viewport.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       viewport.scrollBy({ left: e.deltaY, behavior: 'auto' });
     }
   }, { passive: true });
 
-  // Append
   block.append(prev, viewport, next);
 
-  // Respect prefers-reduced-motion
+  // Autoplay (pause on hover/focus)
+  const AUTOPLAY_MS = 3000;
+  let timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS);
+  const stop = () => { clearInterval(timer); timer = null; };
+  const start = () => { if (!timer) timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS); };
+
+  block.addEventListener('mouseenter', stop);
+  block.addEventListener('mouseleave', start);
+  block.addEventListener('focusin', stop);
+  block.addEventListener('focusout', start);
+
+  // Respect reduced motion
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stop();
     viewport.style.scrollBehavior = 'auto';
   }
 }
