@@ -323,3 +323,10 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+.columns + .block.progress {
+  margin-top: -40px;
+  padding-left: 40px;
+  width: 70%;
+}
+
