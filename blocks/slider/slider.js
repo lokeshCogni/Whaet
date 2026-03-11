@@ -127,10 +127,10 @@ export default function decorate(block) {
   let timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS);
   const stop = () => { clearInterval(timer); timer = null; };
   const start = () => {
-    if(!timer){
-timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS);
-}
-};
+    if (!timer) {
+      timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS);
+    }
+  };
 
   block.addEventListener('mouseenter', stop);
   block.addEventListener('mouseleave', start);
