@@ -1,3 +1,4 @@
+export const NESTED = true;
 export default function decorate(block) {
   [...block.children].forEach((row) => {
     const label = row.children[0]?.textContent.trim() || '';
