@@ -32,12 +32,31 @@
     padding: 0;
   }
 
-  /* Base link styles (put BEFORE specific item rules and hovers) */
+  /* Base link styles */
   header .nav-sections a {
     color: #2a2a2a;
     font-weight: 600;
     text-decoration: none;
     font-size: 16px;
+  }
+
+  /* Tools (right) — moved ABOVE dropdown item rule */
+  header .nav-tools {
+    flex: 0 0 auto;
+  }
+
+  header .nav-tools a {
+    display: inline-block;
+    background: #fff;
+    color: #333 !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  header .nav-tools a:hover {
+    filter: brightness(0.95);
   }
 
   /* Dropdown structure */
@@ -57,43 +76,22 @@
     box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   }
 
-  /* Make dropdown visible on hover of parent */
   header .nav-sections ul > li:hover > ul {
     display: block;
   }
 
-  /* Dropdown item spacing */
   header .nav-sections ul > li > ul > li {
     padding: 8px 0;
   }
 
-  /* Dropdown item links (declare BEFORE the generic :hover rule to avoid descending-specificity) */
+  /* Dropdown item links (keep BEFORE the generic hover) */
   header .nav-sections ul > li > ul > li a {
     color: #333;
-  }
-
-  /* Hover state for all nav section links (comes AFTER base link + dropdown item rules) */
-  header .nav-sections a:hover {
-    color: #000;
-  }
-
-  /* Tools (right) */
-  header .nav-tools {
-    flex: 0 0 auto;
-  }
-
-  /* Tools link (Support). Declare BEFORE :hover of nav-sections to avoid descending-specificity */
-  header .nav-tools a {
-    display: inline-block;
-    background: #fff;
-    color: #333 !important;
-    padding: 10px 20px;
-    border-radius: 6px;
-    font-weight: 700;
     text-decoration: none;
   }
 
-  header .nav-tools a:hover {
-    filter: brightness(0.95);
+  /* Hover for all section links (declare last) */
+  header .nav-sections a:hover {
+    color: #000;
   }
 }
