@@ -1,4 +1,3 @@
-
 export default function decorate(block) {
   const address = block.textContent.trim();
   block.innerHTML = `
