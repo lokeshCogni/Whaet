@@ -32,8 +32,4 @@
   transition: width 1s ease; /* smooth animation */
 }
 
-.columns + .block.progress {
-  margin-top: -40px;
-  padding-left: 40px;
-  width: 70%;
-}
+
