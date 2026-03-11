@@ -1,33 +1,23 @@
-header .nav-wrapper {
-  background: #A2A84C; /* olive from Whaet */
-  width: 100%;
-  padding: 0;
-  position: sticky;
-  top: 0;
-  z-index: 9999;
-}
-
 /* ==========================
    DESKTOP NAV LAYOUT
    ========================== */
 @media (width >= 900px) {
-
-  /* brand left, sections center, tools right */
+  /* Container */
   header nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 80px; /* larger like Whaet theme */
+    height: 80px;
     padding: 0 32px;
     background: #A2A84C;
   }
 
-  /* BRAND left */
+  /* Brand (left) */
   header .nav-brand {
     flex: 0 0 auto;
   }
 
-  /* SECTIONS CENTERED */
+  /* Sections (center) */
   header .nav-sections {
     position: absolute;
     left: 50%;
@@ -35,7 +25,6 @@ header .nav-wrapper {
     white-space: nowrap;
   }
 
-  /* Horizontal menu list */
   header .nav-sections ul {
     display: flex;
     gap: 32px;
@@ -43,7 +32,7 @@ header .nav-wrapper {
     padding: 0;
   }
 
-  /* menu links */
+  /* Base link styles (put BEFORE specific item rules and hovers) */
   header .nav-sections a {
     color: #2a2a2a;
     font-weight: 600;
@@ -51,12 +40,7 @@ header .nav-wrapper {
     font-size: 16px;
   }
 
-  /* hover */
-  header .nav-sections a:hover {
-    color: #000;
-  }
-
-  /* DROPDOWN (nested UL) */
+  /* Dropdown structure */
   header .nav-sections ul > li {
     position: relative;
   }
@@ -70,30 +54,35 @@ header .nav-wrapper {
     width: 200px;
     background: #fff;
     border-radius: 4px;
-    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 10%);
   }
 
-  /* show dropdown on hover */
+  /* Make dropdown visible on hover of parent */
   header .nav-sections ul > li:hover > ul {
     display: block;
   }
 
-  /* dropdown items */
+  /* Dropdown item spacing */
   header .nav-sections ul > li > ul > li {
     padding: 8px 0;
   }
 
+  /* Dropdown item links (declare BEFORE the generic :hover rule to avoid descending-specificity) */
   header .nav-sections ul > li > ul > li a {
     color: #333;
   }
 
-  /* ==========================
-     TOOLS (SUPPORT BUTTON)
-     ========================== */
+  /* Hover state for all nav section links (comes AFTER base link + dropdown item rules) */
+  header .nav-sections a:hover {
+    color: #000;
+  }
+
+  /* Tools (right) */
   header .nav-tools {
     flex: 0 0 auto;
   }
 
+  /* Tools link (Support). Declare BEFORE :hover of nav-sections to avoid descending-specificity */
   header .nav-tools a {
     display: inline-block;
     background: #fff;
@@ -105,6 +94,6 @@ header .nav-wrapper {
   }
 
   header .nav-tools a:hover {
-    filter: brightness(.95);
+    filter: brightness(0.95);
   }
 }
