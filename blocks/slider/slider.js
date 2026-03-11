@@ -66,7 +66,7 @@ function loopScroll(viewport, dir) {
 
   // Wrap backward (first → last)
   if (dir < 0 && viewport.scrollLeft <= step / 2) {
-    viewport.scrollLeft = max; 
+    viewport.scrollLeft = max;
     requestAnimationFrame(() => {
       viewport.scrollBy({ left: -step, behavior: 'smooth' });
     });
@@ -126,8 +126,7 @@ export default function decorate(block) {
   const AUTOPLAY_MS = 3000;
   let timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS);
   const stop = () => { clearInterval(timer); timer = null; };
-  const start = () => { if (!timer) timer = setInterval(() => 
-    loopScroll(viewport, 1), AUTOPLAY_MS); };
+  const start = () => { if (!timer) timer = setInterval(() => loopScroll(viewport, 1), AUTOPLAY_MS); };
 
   block.addEventListener('mouseenter', stop);
   block.addEventListener('mouseleave', start);
