@@ -1,4 +1,7 @@
-:root { --olive: #A2A84C; }
+/* blocks/slider/slider.css */
+:root {
+  --olive: #A2A84C;
+}
 
 .block.slider {
   --gap: 24px;
@@ -8,14 +11,14 @@
 
 /* Viewport & track (native scroll-snap for no-JS fallback) */
 .slider-viewport {
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto hidden; /* shorthand: x=auto, y=hidden */
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   display: block;
   padding: 8px 40px; /* space for buttons overlay */
 }
+
 .slider-track {
   display: flex;
   gap: var(--gap);
@@ -35,6 +38,7 @@
   aspect-ratio: 4 / 3;
   background: #ddd;
 }
+
 .slider-card .card-media img,
 .slider-card .card-media picture {
   width: 100%;
@@ -61,7 +65,7 @@
 
 /* optional smaller meta text under the image */
 .slider-card .card-meta {
-  display: none; /* hide by default to match the minimal look */
+  display: none; /* hidden by default to match the minimal look */
   padding: 10px 12px 12px;
   color: #333;
 }
@@ -88,26 +92,50 @@
   box-shadow: 0 4px 12px rgb(0 0 0 / 18%);
   cursor: pointer;
 }
-.slider-btn.prev { left: 0; }
-.slider-btn.next { right: 0; }
+
+.slider-btn.prev {
+  left: 0;
+}
+
+.slider-btn.next {
+  right: 0;
+}
 
 /* Chevron glyph (CSS only) */
 .slider-btn .chev {
   display: block;
-  width: 10px; height: 10px;
+  width: 10px;
+  height: 10px;
   border-right: 3px solid #666;
   border-bottom: 3px solid #666;
   margin: 0 auto;
   transform: rotate(-45deg);
 }
-.slider-btn.next .chev { transform: rotate(315deg); }
-.slider-btn.prev .chev { transform: rotate(135deg); }
 
-.slider-btn:hover { filter: brightness(0.98); }
-.slider-btn:focus-visible { outline: 2px solid var(--olive); outline-offset: 2px; }
+.slider-btn.next .chev {
+  transform: rotate(315deg);
+}
+
+.slider-btn.prev .chev {
+  transform: rotate(135deg);
+}
+
+.slider-btn:hover {
+  filter: brightness(0.98);
+}
+
+.slider-btn:focus-visible {
+  outline: 2px solid var(--olive);
+  outline-offset: 2px;
+}
 
 /* Responsive */
 @media (width <= 600px) {
-  .slider-card { flex-basis: 240px; }
-  .slider-viewport { padding: 8px 32px; }
+  .slider-card {
+    flex-basis: 240px;
+  }
+
+  .slider-viewport {
+    padding: 8px 32px;
+  }
 }
