@@ -292,3 +292,119 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+
+/* ==========================
+   MAKE HEADER FIXED & CLEAN
+   ========================== */
+
+header .nav-wrapper {
+  background: #A2A84C; /* olive from Whaet */
+  width: 100%;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+/* ==========================
+   DESKTOP NAV LAYOUT
+   ========================== */
+@media (width >= 900px) {
+
+  /* brand left, sections center, tools right */
+  header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px; /* larger like Whaet theme */
+    padding: 0 32px;
+    background: #A2A84C;
+  }
+
+  /* BRAND left */
+  header .nav-brand {
+    flex: 0 0 auto;
+  }
+
+  /* SECTIONS CENTERED */
+  header .nav-sections {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  /* Horizontal menu list */
+  header .nav-sections ul {
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* menu links */
+  header .nav-sections a {
+    color: #2a2a2a;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px;
+  }
+
+  /* hover */
+  header .nav-sections a:hover {
+    color: #000;
+  }
+
+  /* DROPDOWN (nested UL) */
+  header .nav-sections ul > li {
+    position: relative;
+  }
+
+  header .nav-sections ul > li > ul {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: -20px;
+    padding: 16px;
+    width: 200px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  }
+
+  /* show dropdown on hover */
+  header .nav-sections ul > li:hover > ul {
+    display: block;
+  }
+
+  /* dropdown items */
+  header .nav-sections ul > li > ul > li {
+    padding: 8px 0;
+  }
+
+  header .nav-sections ul > li > ul > li a {
+    color: #333;
+  }
+
+  /* ==========================
+     TOOLS (SUPPORT BUTTON)
+     ========================== */
+  header .nav-tools {
+    flex: 0 0 auto;
+  }
+
+  header .nav-tools a {
+    display: inline-block;
+    background: #fff;
+    color: #333 !important;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  header .nav-tools a:hover {
+    filter: brightness(.95);
+  }
+}
