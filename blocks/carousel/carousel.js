@@ -132,7 +132,7 @@ export default async function decorate(block) {
   slidesWrapper.classList.add('carousel-slides');
 
   // We’ll _not_ create indicators anymore.
-  let slideIndicators = null;
+  // let slideIndicators = null;
 
   // Navigation arrows only (no dots)
   if (!isSingleSlide) {
