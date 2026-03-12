@@ -102,3 +102,27 @@ justify-content: space-around;
   padding:10px;
   height: 300px;
 }
+
+.block.cards.expert-members>ul{
+  display: flex;
+}
+
+.block.cards.expert-members>ul>li{
+border: none;
+background-color: snow;
+}
+.block.cards.expert-members>ul>li>div>{
+margin-top: -10px;
+}
+.block.cards.expert-members>ul>li>div>h2{
+font-size: 18.03px;
+text-align: center;
+}
+.block.cards.expert-members>ul>li>div>table>tbody>tr{
+/* background-color: #A2A84C; */
+display: flex;
+gap:10px;
+}
+.block.cards.expert-members>ul>li>div>table>tbody>tr>td>picture>img{
+width: 20px;
+}

@@ -139,3 +139,24 @@ text-align: center;
 .columns-wrapper > .block.columns.our-services>div>div>p>picture>img{
 width: 90px;
 }
+.columns-wrapper > .block.columns.invest-ment>div>div>h4{
+color: #a2a84c;
+}
+.columns-wrapper > .block.columns.invest-ment>div>div>table>tbody>tr>td>h2{
+/* background-color: #a2a84c; */
+font-family: "Rajdhani", Sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: lighter;
+
+}
+
+.columns-wrapper > .block.columns.invest-ment>div>div>table>tbody>tr>td>p>picture>img{
+  background-color: #a2a84c;
+  padding: 8px;
+  width: 50px;
+}
+.columns-wrapper > .block.columns.invest-ment>div>div>table>tbody>tr>td>p>picture>img:hover{
+  background-color: #ffda00;
+  transition: 0.5s;
+}

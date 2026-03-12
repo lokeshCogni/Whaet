@@ -1,0 +1,93 @@
+:root {
+  --olive: rgb(162 168 76);
+  --line:  rgb(218 218 218);
+  --ink:   #2a2a2a;
+}
+
+.block.contact-form {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+/* optional theme tweak */
+.block.contact-form.theme-olive .cf-submit {
+  background: var(--olive);
+}
+
+.cf-heading {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.cf-form { display: grid; gap: 16px; }
+
+.cf-row {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cf-form input,
+.cf-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  font: inherit;
+  color: var(--ink);
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+.cf-form input::placeholder,
+.cf-form textarea::placeholder { color: #999; }
+
+.cf-form input:focus,
+.cf-form textarea:focus {
+  outline: none;
+  border-color: var(--olive);
+  box-shadow: 0 0 0 3px rgb(162 168 76 / 25%);
+}
+
+.cf-textarea textarea { resize: vertical; min-height: 160px; }
+
+/* anti-bot (honeypot) */
+.cf-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
+
+.cf-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.cf-submit {
+  background: var(--olive);
+  color: #fff;
+  border: 0;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: filter .2s ease, transform .2s ease;
+}
+
+.cf-submit:hover    { filter: brightness(.95); transform: translateY(-1px); }
+.cf-submit:disabled { opacity: .7; cursor: not-allowed; }
+
+.cf-status { margin: 0; color: #555; }
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden; clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Responsive */
+@media (width <= 720px) {
+  .cf-row { grid-template-columns: 1fr; }
+}
