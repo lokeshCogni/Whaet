@@ -10,7 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-:root {
+
+ :root {
   /* colors */
   --background-color: white;
   --light-color: #f8f8f8;
@@ -21,7 +22,7 @@
 
   /* fonts */
   --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  /* --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif; */
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -179,7 +180,7 @@ button.button {
   max-width: 100%;
   margin: 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
+  border-radius: 0.4em;
   padding: 0.5em 1.2em;
   font: inherit;
   font-weight: 500;
@@ -236,7 +237,7 @@ a.button.secondary:focus-visible,
 button.button.secondary:hover,
 button.button.secondary:focus-visible {
   /* border-color: var(--dark-color); */
-  background-color:rgb(197 197 42);
+  background-color:rgb(255 218 0);;
   color:white;
 }
 
