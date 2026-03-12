@@ -111,10 +111,10 @@
   transition: background-color 0.2s;
 }
 
-.carousel .carousel-navigation-buttons button:hover,
+/* .carousel .carousel-navigation-buttons button:hover,
 .carousel .carousel-navigation-buttons button:focus-visible {
   background-color: rgb(19 19 19 / 75%);
-}
+} */
 
 .carousel .carousel-navigation-buttons button::after {
   display: block;
