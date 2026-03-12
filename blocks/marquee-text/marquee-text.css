@@ -39,7 +39,7 @@
 
 /* Hovered word style */
 .marquee-track p:hover {
-  color: #fff;
+  color: #FFDA00;
   -webkit-text-stroke: 0;
 }
 
