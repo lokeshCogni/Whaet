@@ -31,3 +31,34 @@
     order: unset;
   }
 }
+
+.column-wrapper>.block.cards.public-service{
+
+}
+.block.columns.we-help.columns-2-cols {
+/* background-color: aqua; */
+margin-top: -40px;
+}
+.block.columns.we-help.columns-2-cols>div>div>table>tbody>tr{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.block.columns.we-help.columns-2-cols>div>div>table>tbody>tr>td>picture>img {
+border-radius: 5px 5px 5px 5px;
+    /* margin: 0px 12px 0px 0px; */
+    /* font-size: 50px;
+    width: 80px;
+    height: 80px; */
+    /* line-height: 80px; */
+background-color: rgb(162 168 76);
+width: 100px;
+padding: 10px;
+margin-top: 25px;
+
+}
+.block.columns.we-help.columns-2-cols>div>div>table>tbody>tr>td>picture>img:hover {
+background-color: rgb(255 218 0);
+transition: .5s;
+}
