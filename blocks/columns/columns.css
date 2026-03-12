@@ -62,3 +62,80 @@ margin-top: 25px;
 background-color: rgb(255 218 0);
 transition: .5s;
 }
+
+
+/* our services */
+/* base card */
+.columns-wrapper > .block.columns.our-services > div > div {
+  position: relative;             /* needed for the overlay */
+  overflow: hidden;               /* hide overlay while it slides in */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: #ffffff;
+  border: 1px solid #dadada;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  transition: color 0.5s ease, background-color 0.5s ease, border-color 0.5s ease;
+}
+
+/* Persistent bottom line */
+.columns-wrapper > .block.columns.our-services > div > div::after {
+  content: "";
+  position: absolute;
+  left: 0.1px;
+  right: 0.1px;
+  bottom: 0;
+  height: 3px;
+  background-color: rgb(162 168 76); /* olive */
+  z-index: 2;
+}
+
+/* the sliding background overlay */
+.columns-wrapper > .block.columns.our-services > div > div::before {
+  content: "";
+  position: absolute;
+  inset: 0;                       /* top:0 right:0 bottom:0 left:0 */
+  background-color: rgb(162 168 76);   /* #A2A84C, modern rgb syntax */
+  transform: translateY(100%);    /* start hidden below */
+  transition: transform 0.5s ease;
+  z-index: 0;                     /* behind content */
+}
+
+/* on hover: bring the overlay up, and switch text color to white */
+.columns-wrapper > .block.columns.our-services > div > div:hover::before {
+  transform: translateY(0);       /* slide from bottom to top */
+}
+
+.columns-wrapper > .block.columns.our-services > div > div:hover {
+  color: #ffffff;                 /* text color on top of olive */
+  border-color: rgb(162 168 76);  /* optional: match the overlay color */
+}
+
+/* keep the content above the overlay */
+.columns-wrapper > .block.columns.our-services > div > div > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* optional: make icons invert to white on hover (if your tiles use img/svg) */
+.columns-wrapper > .block.columns.our-services > div > div:hover img,
+.columns-wrapper > .block.columns.our-services > div > div:hover svg {
+  filter: brightness(0) invert(1);
+  transition: filter 0.5s ease;
+}
+.columns-wrapper > .block.columns.our-services>div>div>p{
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+text-align: center;
+
+
+} 
+.columns-wrapper > .block.columns.our-services>div>div>p>picture>img{
+width: 90px;
+}

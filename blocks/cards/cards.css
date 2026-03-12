@@ -86,3 +86,19 @@ text-align: center;
 .default-content-wrapper>h2{
   text-align: center;
 }
+
+/* our services */
+.block.cards.our-services{
+margin-bottom: 10px;
+text-align: center;
+display: flex;
+flex-direction: column;
+/* background-color: #a2a84c; */
+/* align-items: center; */
+justify-content: space-around;
+
+}
+.block.cards.our-services>ul>li{
+  padding:10px;
+  height: 300px;
+}
