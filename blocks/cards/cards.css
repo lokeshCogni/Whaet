@@ -60,4 +60,16 @@ height: 45px;
 
 }
 
+/* full column */
+
+.block.cards.full-column{
+  margin-top: 50px;
+  background-color: #A2A84C;
+  color: white;
+}
+.block.cards.full-column>ul>li{
+  background-color: #A2A84C;
+  border: 0;
+}
+
 
