@@ -35,3 +35,29 @@
   /* object-fit: cover; */
     
 }
+
+.block.cards.public-service{
+  /* background-color: aqua; */
+ position: relative;
+    top: 0;
+}
+.block.cards.public-service >ul>li{
+/* background-color: aqua; */
+/* height: 180px; */
+border-radius: 10px;
+position: relative;
+top: -100px;
+margin: 10px;
+}
+.block.cards.public-service >ul>li:hover{
+background-color: #a2a84c;
+border: 0;
+transition: .5s;
+color: white;
+}
+.block.cards.public-service >ul>li>.cards-card-image>picture>img{
+height: 45px;
+
+}
+
+
