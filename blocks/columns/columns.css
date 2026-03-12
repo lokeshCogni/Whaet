@@ -160,3 +160,33 @@ font-family: "Rajdhani", Sans-serif;
   background-color: #ffda00;
   transition: 0.5s;
 }
+
+/* address */
+.columns-wrapper > .block.columns.add-ress>div>div>table>tbody>tr>td>picture>img{
+    /* background-color: #ffda00; */
+    width: 46px;
+    height: 46px;
+    border: 1px solid black;
+    border-radius: 46px;
+    padding: 3px;
+    background-color: #a2a84c;
+    object-fit: cover;
+}
+.columns-wrapper > .block.columns.add-ress>div>div>table>tbody{
+display: flex;
+flex-direction: column;
+  background-color: white;
+  padding: 3px;
+  gap: 22px;
+}
+.columns-wrapper > .block.columns.add-ress>div>div>table>tbody>tr{
+display: flex;
+flex-direction: row;
+gap: 20px;
+  align-items: center;
+}
+.columns-wrapper > .block.columns.add-ress>div>div>table>tbody>tr>td>picture>img:hover{
+background-color: #6c757d;
+transition: 0.5s;
+}
+

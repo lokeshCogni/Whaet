@@ -22,3 +22,11 @@ footer.footer-wrapper .footer.block > div {
   box-shadow: 0 12px 28px rgb(0 0 0 / 30%);
   position: relative;
 }
+
+footer>div>div>div>div>div>div>div>table>tbody>tr>td>picture>img{
+  background-color: black;
+  height: 30px;
+}
+.default-content-wrapper{
+  text-align: center;
+}
