@@ -72,4 +72,17 @@ height: 45px;
   border: 0;
 }
 
+/* make plan */
+.block.cards.make-plan>ul{
+text-align: center;
 
+}
+
+.block.cards.make-plan>ul>li:hover{
+  background-color: rgb(162, 168, 76);
+  transition: 0.5s;
+  color: white;
+}
+.default-content-wrapper>h2{
+  text-align: center;
+}
