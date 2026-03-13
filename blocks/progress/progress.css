@@ -32,4 +32,10 @@
   transition: width 1s ease; /* smooth animation */
 }
 
-
+.progress-wrapper{
+  width: 44%;
+  align-items: start;
+  position: relative;
+  left: -306px;
+  top: -172px;
+}
