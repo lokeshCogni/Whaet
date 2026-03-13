@@ -64,6 +64,11 @@ border: none;
 background-color: snow;
 }
 
+.block.cards.our-services>ul>li{
+  padding:10px;
+  height: 300px;
+}
+
 .block.cards.public-service >ul>li:hover{
 background-color: #a2a84c;
 border: 0;
@@ -127,12 +132,6 @@ justify-content: space-around;
 .block.cards.expert-members>ul{
   display: flex;
 }
-
-.block.cards.our-services>ul>li{
-  padding:10px;
-  height: 300px;
-}
-
 
 
 .block.cards.expert-members>ul>li>div>{
