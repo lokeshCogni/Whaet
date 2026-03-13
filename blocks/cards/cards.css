@@ -58,11 +58,21 @@ margin: 10px;
   background-color: #A2A84C;
   border: 0;
 }
+
+.block.cards.expert-members>ul>li{
+border: none;
+background-color: snow;
+}
+
 .block.cards.public-service >ul>li:hover{
 background-color: #a2a84c;
 border: 0;
 transition: .5s;
 color: white;
+}
+
+.block.cards.expert-members>ul>li>div>table>tbody>tr>td>picture>img{
+width: 20px;
 }
 
 .block.cards.public-service >ul>li>.cards-card-image>picture>img{
@@ -123,10 +133,7 @@ justify-content: space-around;
   height: 300px;
 }
 
-.block.cards.expert-members>ul>li{
-border: none;
-background-color: snow;
-}
+
 
 .block.cards.expert-members>ul>li>div>{
 margin-top: -10px;
@@ -144,6 +151,4 @@ display: flex;
 gap:10px;
 }
 
-.block.cards.expert-members>ul>li>div>table>tbody>tr>td>picture>img{
-width: 20px;
-}
+
