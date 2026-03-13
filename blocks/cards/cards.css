@@ -41,20 +41,25 @@
  position: relative;
     top: 0;
 }
+
 .block.cards.public-service >ul>li{
+    
 /* background-color: aqua; */
 /* height: 180px; */
+    
 border-radius: 10px;
 position: relative;
 top: -100px;
 margin: 10px;
 }
+
 .block.cards.public-service >ul>li:hover{
 background-color: #a2a84c;
 border: 0;
 transition: .5s;
 color: white;
 }
+
 .block.cards.public-service >ul>li>.cards-card-image>picture>img{
 height: 45px;
 
@@ -67,12 +72,14 @@ height: 45px;
   background-color: #A2A84C;
   color: white;
 }
+
 .block.cards.full-column>ul>li{
   background-color: #A2A84C;
   border: 0;
 }
 
 /* make plan */
+
 .block.cards.make-plan>ul{
 text-align: center;
 
@@ -83,46 +90,58 @@ text-align: center;
   transition: 0.5s;
   color: white;
 }
+
 .default-content-wrapper>h2{
   text-align: center;
 }
 
 /* our services */
+
 .block.cards.our-services{
 margin-bottom: 10px;
 text-align: center;
 display: flex;
 flex-direction: column;
+    
 /* background-color: #a2a84c; */
 /* align-items: center; */
+    
 justify-content: space-around;
 
 }
-.block.cards.our-services>ul>li{
-  padding:10px;
-  height: 300px;
-}
+
 
 .block.cards.expert-members>ul{
   display: flex;
+}
+
+.block.cards.our-services>ul>li{
+  padding:10px;
+  height: 300px;
 }
 
 .block.cards.expert-members>ul>li{
 border: none;
 background-color: snow;
 }
+
 .block.cards.expert-members>ul>li>div>{
 margin-top: -10px;
 }
+
 .block.cards.expert-members>ul>li>div>h2{
 font-size: 18.03px;
 text-align: center;
 }
+
 .block.cards.expert-members>ul>li>div>table>tbody>tr{
+    
 /* background-color: #A2A84C; */
+    
 display: flex;
 gap:10px;
 }
+
 .block.cards.expert-members>ul>li>div>table>tbody>tr>td>picture>img{
 width: 20px;
 }
